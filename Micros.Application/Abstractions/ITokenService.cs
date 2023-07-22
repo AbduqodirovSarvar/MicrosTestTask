@@ -9,6 +9,6 @@ namespace Micros.Application.Abstractions
 {
     public interface ITokenService
     {
-        string GetToken(Claim[] claims);
+        string GetAccessToken(Claim[] claims);
     }
 }
