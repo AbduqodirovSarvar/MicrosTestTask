@@ -16,4 +16,11 @@
     <ProjectReference Include="..\Micros.Domain\Micros.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\InComeCases\" />
+    <Folder Include="UseCases\CommonCases\" />
+    <Folder Include="UseCases\OutComeCases\" />
+    <Folder Include="UseCases\UserCases\" />
+  </ItemGroup>
+
 </Project>
