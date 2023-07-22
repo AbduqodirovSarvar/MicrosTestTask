@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Micros.Application.Abstractions;
+using Micros.Application.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Micros.Application.UseCases.Authorize.Commands
 {
-    public class LoginCommand 
+    public class LoginCommand : ICommand<LoginViewModel>
     {
         [Required]
         public string Name { get; set; } = string.Empty;
