@@ -15,6 +15,7 @@ namespace Micros.Application.EntityTypeConfigurations
         {
             builder.HasIndex(x => x.FirstName).IsUnique();
             builder.HasMany(c => c.InComes).WithOne(u => u.User).HasForeignKey(x => x.UserId);
+            builder.HasMany(o => o.InComes).WithOne(u => u.User).HasForeignKey(x => x.UserId);
         }
     }
 }
