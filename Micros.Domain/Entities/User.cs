@@ -18,5 +18,8 @@ namespace Micros.Domain.Entities
         public Gender Gender { get; set; }
         public Position Position { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.UtcNow;
+
+        public ICollection<InCome> InComes { get; set; } = new HashSet<InCome>();
+        public ICollection<OutCome> OutComes { get; set; } = new HashSet<OutCome>();
     }
 }
