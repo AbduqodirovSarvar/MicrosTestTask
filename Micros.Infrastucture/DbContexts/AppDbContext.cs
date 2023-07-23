@@ -27,7 +27,8 @@ namespace Micros.Infrastucture.DbContexts
                 FirstName = "Admin",
                 LastName = "Admin",
                 Password = "DefaultAdminPassword",
-                Gender = Gender.Male
+                Gender = Gender.Male,
+                Position = Position.Admin
             });
         }
     }
