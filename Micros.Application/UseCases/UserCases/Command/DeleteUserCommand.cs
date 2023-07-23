@@ -11,7 +11,7 @@ namespace Micros.Application.UseCases.UserCases.Command
 {
     public class DeleteUserCommand : ICommand<UserViewModel>
     {
-        public DeleteUserCommand(int id) 
+        public DeleteUserCommand(int id)
         {
             Id = id;
         }

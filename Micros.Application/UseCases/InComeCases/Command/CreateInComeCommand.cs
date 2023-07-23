@@ -16,8 +16,6 @@ namespace Micros.Application.UseCases.InComeCases.Command
     {
         public CreateInComeCommand() { }
         [Required]
-        public int UserId { get; set; }
-        [Required]
         public decimal Amount { get; set; }
         [Required]
         public InComeCategory Category { get; set; }

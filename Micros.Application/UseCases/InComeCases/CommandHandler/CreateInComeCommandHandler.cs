@@ -16,15 +16,18 @@ namespace Micros.Application.UseCases.InComeCases.CommandHandler
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
-        public CreateInComeCommandHandler(IAppDbContext context, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public CreateInComeCommandHandler(IAppDbContext context, IMapper mapper, ICurrentUserService currentUserService)
         {
             _context = context;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
 
         public async Task<InComeViewModel> Handle(CreateInComeCommand request, CancellationToken cancellationToken)
         {
             var inCome = _mapper.Map<InCome>(request);
+            inCome.UserId = _currentUserService.UserId;
             DateTime date = DateTime.UtcNow;
             inCome.CreatedDate = date;
             await _context.InComes.AddAsync(inCome, cancellationToken);
