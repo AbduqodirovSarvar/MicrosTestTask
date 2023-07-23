@@ -1,5 +1,6 @@
 ﻿using Micros.Application.Abstractions;
 using Micros.Domain.Entities;
+using Micros.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,13 @@ namespace Micros.Infrastucture.DbContexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                FirstName = "Admin",
+                LastName = "Admin",
+                Password = "DefaultAdminPassword",
+                Gender = Gender.Male
+            });
         }
     }
 }
