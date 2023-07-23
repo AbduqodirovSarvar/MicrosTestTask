@@ -26,7 +26,7 @@ namespace Micros.Application.UseCases.Authorize.CommandHandler
 
         public async Task<LoginViewModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.FirstName.ToLower() == request.Name.ToLower(), cancellationToken);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.FirstName.ToLower() == request.FirstName.ToLower(), cancellationToken);
             if (user == null || user.Password != _hashService.GetHash(request.Password))
                 throw new Exception();
 
