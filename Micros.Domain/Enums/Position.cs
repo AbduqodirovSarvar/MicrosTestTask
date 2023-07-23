@@ -8,6 +8,7 @@ namespace Micros.Domain.Enums
 {
     public enum Position
     {
+        Admin = 0,
         GrandFather = 1,
         GrandMother = 2,
         Father = 3,
