@@ -10,7 +10,7 @@ namespace Micros.Application.UseCases.UserCases.Query
 {
     public class GetUserQuery : IQuery<UserViewModel>
     {
-        public GetUserQuery() { }
+        public GetUserQuery(int id) { Id = id; }
         public int Id { get; set; }
     }
 }

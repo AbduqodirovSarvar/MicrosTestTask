@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Micros.Application.UseCases.Authorize.Commands;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Micros.Api.Controllers
@@ -7,5 +9,23 @@ namespace Micros.Api.Controllers
     [ApiController]
     public class AuthorizeController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        public AuthorizeController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginCommand command)
+        {
+            try
+            {
+                return Ok(await _mediator.Send(command));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

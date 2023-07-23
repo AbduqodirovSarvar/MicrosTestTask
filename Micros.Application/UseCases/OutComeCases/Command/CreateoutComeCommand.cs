@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Micros.Application.UseCases.OutComeCases.Command
 {
-    public class CreateoutComeCommand : ICommand<OutComeViewModel>
+    public class CreateOutComeCommand : ICommand<OutComeViewModel>
     {
-        public CreateoutComeCommand() { }
+        public CreateOutComeCommand() { }
         [Required]
         public decimal Amount { get; set; }
         [Required]
