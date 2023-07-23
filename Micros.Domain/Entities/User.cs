@@ -12,7 +12,7 @@ namespace Micros.Domain.Entities
         public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public string Password = "Password";
+        public string Password { get; set; } = "Password";
         public decimal Balance { get; set; }
         public DateOnly BirthDay { get; set; } = new DateOnly(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day);
         public Gender Gender { get; set; }

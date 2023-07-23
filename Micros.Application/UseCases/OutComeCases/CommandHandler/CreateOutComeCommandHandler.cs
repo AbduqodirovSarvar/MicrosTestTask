@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Micros.Application.UseCases.OutComeCases.CommandHandler
 {
-    public class CreateOutComeCommandHandler : ICommandHandler<CreateoutComeCommand, OutComeViewModel>
+    public class CreateOutComeCommandHandler : ICommandHandler<CreateOutComeCommand, OutComeViewModel>
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace Micros.Application.UseCases.OutComeCases.CommandHandler
             _currentUserService = currentUserService;
         }
 
-        public async Task<OutComeViewModel> Handle(CreateoutComeCommand request, CancellationToken cancellationToken)
+        public async Task<OutComeViewModel> Handle(CreateOutComeCommand request, CancellationToken cancellationToken)
         {
             var outCome = _mapper.Map<OutCome>(request);
             outCome.UserId = _currentUserService.UserId;

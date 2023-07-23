@@ -12,7 +12,7 @@ namespace Micros.Application.UseCases.Authorize.Commands
     public class LoginCommand : ICommand<LoginViewModel>
     {
         [Required]
-        public string Name { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
         [Required]
         public string Password { get; set; } = "Password";
     }

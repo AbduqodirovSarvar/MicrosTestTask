@@ -20,6 +20,7 @@ namespace Micros.Infrastucture.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
                     Balance = table.Column<decimal>(type: "numeric", nullable: false),
                     BirthDay = table.Column<DateOnly>(type: "date", nullable: false),
                     Gender = table.Column<int>(type: "integer", nullable: false),
@@ -74,6 +75,11 @@ namespace Micros.Infrastucture.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Balance", "BirthDay", "CreatedTime", "FirstName", "Gender", "LastName", "Password", "Position" },
+                values: new object[] { 1, 0m, new DateOnly(2023, 7, 23), new DateTime(2023, 7, 23, 12, 1, 14, 666, DateTimeKind.Utc).AddTicks(953), "Admin", 1, "Admin", "xroG8fDLxyHzvbRZpHteff/y2neai77DjHBAXNHjqoI=", 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InComes_UserId",

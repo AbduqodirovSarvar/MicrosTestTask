@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Micros.Infrastucture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230722164158_Initial")]
+    [Migration("20230723120114_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -107,12 +107,30 @@ namespace Micros.Infrastucture.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Position")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Balance = 0m,
+                            BirthDay = new DateOnly(2023, 7, 23),
+                            CreatedTime = new DateTime(2023, 7, 23, 12, 1, 14, 666, DateTimeKind.Utc).AddTicks(953),
+                            FirstName = "Admin",
+                            Gender = 1,
+                            LastName = "Admin",
+                            Password = "xroG8fDLxyHzvbRZpHteff/y2neai77DjHBAXNHjqoI=",
+                            Position = 0
+                        });
                 });
 
             modelBuilder.Entity("Micros.Domain.Entities.InCome", b =>

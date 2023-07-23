@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 
 namespace Micros.Application.MappingProfiles
 {
-    public class Mapper : Profile
+    public class Mapping : Profile
     {
-        public Mapper() 
+        public Mapping() 
         {
             CreateMap<User, UserViewModel>();
             CreateMap<InCome, InComeViewModel>();
             CreateMap<OutCome, OutComeViewModel>();
             CreateMap<CreateUserCommand, User>();
             CreateMap<CreateInComeCommand, InCome>();
-            CreateMap<CreateoutComeCommand, OutCome>();
+            CreateMap<CreateOutComeCommand, OutCome>();
         }
     }
 }

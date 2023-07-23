@@ -33,11 +33,14 @@ namespace Micros.Application.UseCases.UserCases.CommandHandler
 
             user.FirstName = request?.FirstName ?? user.FirstName;
             user.LastName = request?.LastName ?? user.LastName;
-            user.BirthDay = request?.BirthDay ?? user.BirthDay;
             user.Position = request?.Position ?? user.Position;
             if (request?.Password != null)
             {
                 user.Password = _hashService.GetHash(request.Password);
+            }
+            if (request?.Year != null && request?.Month != null && request?.Day != null)
+            {
+                user.BirthDay = new DateOnly(request.Year.Value, request.Month.Value, request.Day.Value);
             }
             
             return _mapper.Map<UserViewModel>(user);

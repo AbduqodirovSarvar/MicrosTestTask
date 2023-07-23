@@ -2,6 +2,7 @@
 using Micros.Application.UseCases.InComeCases.Query;
 using Micros.Application.UseCases.OutComeCases.Command;
 using Micros.Application.UseCases.OutComeCases.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Micros.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OutComeController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,7 +20,7 @@ namespace Micros.Api.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(CreateOutComeCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateOutComeCommand command)
         {
             try
             {

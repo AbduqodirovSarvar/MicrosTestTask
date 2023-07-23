@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Micros.Application.UseCases.Authorize.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace Micros.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginCommand command)
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
             try
             {

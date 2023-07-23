@@ -1,10 +1,14 @@
 ﻿using MediatR;
 using Micros.Application.UseCases.UserCases.Command;
 using Micros.Application.UseCases.UserCases.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Micros.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IMediator _mediator;
@@ -12,9 +16,9 @@ namespace Micros.Api.Controllers
         {
             _mediator = mediator;
         }
-
+        [Authorize(Policy = "AdminActions")]
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(CreateUserCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
             try
             {
@@ -27,7 +31,7 @@ namespace Micros.Api.Controllers
         }
 
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(UpdateUserCommand command)
+        public async Task<IActionResult> Update([FromBody] UpdateUserCommand command)
         {
             try
             {
@@ -39,6 +43,7 @@ namespace Micros.Api.Controllers
             }
         }
 
+        [Authorize(Policy = "AdminActions")]
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -66,7 +71,7 @@ namespace Micros.Api.Controllers
         }
 
         [HttpGet("ByPosition")]
-        public async Task<IActionResult> GetByPosition(GetAllUserByPositionQuery query)
+        public async Task<IActionResult> GetByPosition([FromQuery] GetAllUserByPositionQuery query)
         {
             return Ok(await _mediator.Send(query));
         }

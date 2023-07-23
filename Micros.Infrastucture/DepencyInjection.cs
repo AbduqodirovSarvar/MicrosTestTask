@@ -1,4 +1,5 @@
 ﻿using Micros.Application.Abstractions;
+using Micros.Domain.Enums;
 using Micros.Infrastucture.DbContexts;
 using Micros.Infrastucture.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +43,39 @@ namespace Micros.Infrastucture
                     };
                 });
 
+            _services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AdminActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.Admin.ToString());
+                });
+
+                option.AddPolicy("GrandFatherActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.GrandFather.ToString());
+                });
+
+                option.AddPolicy("GrandMotherActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.GrandMother.ToString());
+                });
+                option.AddPolicy("MotherActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.Mother.ToString());
+                });
+                option.AddPolicy("FatherActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.Father.ToString());
+                });
+                option.AddPolicy("ChildActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.Child.ToString());
+                });
+                option.AddPolicy("OtherActions", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, Position.Others.ToString());
+                });
+            });
 
             return _services;
         }

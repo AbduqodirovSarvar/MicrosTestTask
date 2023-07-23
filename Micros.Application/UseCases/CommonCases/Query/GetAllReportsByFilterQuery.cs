@@ -11,9 +11,9 @@ namespace Micros.Application.UseCases.CommonCases.Query
     public class GetAllReportsByFilterQuery : IQuery<ReportViewModel>
     {
         public GetAllReportsByFilterQuery() { }
-        public int? UserId { get; set; }
-        public int? Year { get; set; }
-        public int? Month { get; set; }
-        public int? Day { get; set; }
+        public int? UserId { get; set; } = null;
+        public int? Year { get; set; } = null;
+        public int? Month { get; set; } = null;
+        public int? Day { get; set; } = null;
     }
 }

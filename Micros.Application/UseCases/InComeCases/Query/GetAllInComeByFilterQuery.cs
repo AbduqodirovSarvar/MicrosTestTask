@@ -12,10 +12,10 @@ namespace Micros.Application.UseCases.InComeCases.Query
     public class GetAllInComeByFilterQuery : IQuery<List<InComeViewModel>>
     {
         public GetAllInComeByFilterQuery() { }
-        public int? UserId { get; set; }
-        public int? Year { get; set; }
-        public int? Month { get; set; }
-        public int? Day { get; set; }
+        public int? UserId { get; set; } = null;
+        public int? Year { get; set; } = null;
+        public int? Month { get; set; } = null;
+        public int? Day { get; set; } = null;
         public InComeCategory? Category { get; set; }
     }
 }

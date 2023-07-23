@@ -12,8 +12,12 @@ namespace Micros.Infrastucture.DbContexts
 {
     public class AppDbContext : DbContext, IAppDbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) 
-            : base(options) { }
+        private readonly IHashService _hashService;
+        public AppDbContext(DbContextOptions<AppDbContext> options, IHashService hashService) 
+            : base(options) 
+        {
+            _hashService = hashService;
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<InCome> InComes { get; set; }
         public DbSet<OutCome> OutComes { get; set; }
@@ -24,9 +28,10 @@ namespace Micros.Infrastucture.DbContexts
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
             modelBuilder.Entity<User>().HasData(new User
             {
+                Id = 1,
                 FirstName = "Admin",
                 LastName = "Admin",
-                Password = "DefaultAdminPassword",
+                Password = _hashService.GetHash("DefaultAdminPassword"),
                 Gender = Gender.Male,
                 Position = Position.Admin
             });

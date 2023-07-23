@@ -16,10 +16,12 @@ namespace Micros.Application.UseCases.UserCases.CommandHandler
     {
         private readonly IAppDbContext _context;
         private readonly IMapper _mapper;
-        public CreateUserCommandHandler(IAppDbContext context, IMapper mapper)
+        private readonly IHashService _hashService;
+        public CreateUserCommandHandler(IAppDbContext context, IMapper mapper, IHashService hashService)
         {
             _context = context;
             _mapper = mapper;
+            _hashService = hashService;
         }
 
         public async Task<UserViewModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -29,8 +31,11 @@ namespace Micros.Application.UseCases.UserCases.CommandHandler
                 throw new Exception();
 
             user = _mapper.Map<User>(request);
+            user.Password = _hashService.GetHash(request.Password);
+            user.BirthDay = new DateOnly(request.Year, request.Month, request.Day);
             user.CreatedTime = DateTime.UtcNow;
 
+            await _context.Users.AddAsync(user, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
             return _mapper.Map<UserViewModel>(await _context.Users.FirstOrDefaultAsync(x => x.FirstName == user.FirstName, cancellationToken));

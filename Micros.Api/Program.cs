@@ -1,3 +1,4 @@
+using Micros.Application;
 using Micros.Infrastucture;
 using Microsoft.OpenApi.Models;
 
@@ -6,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.ApplicationServices();
 builder.Services.InfrastructureServices(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
