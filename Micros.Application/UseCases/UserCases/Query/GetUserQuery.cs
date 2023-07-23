@@ -1,4 +1,6 @@
-﻿geusing System;
+﻿using Micros.Application.Abstractions;
+using Micros.Application.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace Micros.Application.UseCases.UserCases.Query
 {
-    internal class GetUserQuery
+    public class GetUserQuery : IQuery<UserViewModel>
     {
+        public GetUserQuery() { }
+        public int Id { get; set; }
     }
 }

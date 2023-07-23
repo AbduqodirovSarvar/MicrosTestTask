@@ -14,5 +14,6 @@ namespace Micros.Application.Models.ViewModels
         public int UserId { get; set; }
         public decimal Amount { get; set; }
         public InComeCategory Category { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

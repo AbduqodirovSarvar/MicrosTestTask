@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
@@ -21,13 +22,6 @@
     <Folder Include="UseCases\Authorize\Query\" />
     <Folder Include="UseCases\CommonCases\CommandHandler\" />
     <Folder Include="UseCases\CommonCases\Command\" />
-    <Folder Include="UseCases\CommonCases\QueryHandler\" />
-    <Folder Include="UseCases\InComeCases\CommandHandler\" />
-    <Folder Include="UseCases\InComeCases\QueryHandler\" />
-    <Folder Include="UseCases\OutComeCases\CommandHandler\" />
-    <Folder Include="UseCases\OutComeCases\QueryHandler\" />
-    <Folder Include="UseCases\UserCases\CommandHandler\" />
-    <Folder Include="UseCases\UserCases\QueryHandler\" />
   </ItemGroup>
 
 </Project>
