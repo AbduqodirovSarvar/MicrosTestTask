@@ -14,8 +14,6 @@ namespace Micros.Application.UseCases.OutComeCases.Command
     {
         public CreateoutComeCommand() { }
         [Required]
-        public int UserId { get; set; }
-        [Required]
         public decimal Amount { get; set; }
         [Required]
         public OutComeCategory Category { get; set; }
