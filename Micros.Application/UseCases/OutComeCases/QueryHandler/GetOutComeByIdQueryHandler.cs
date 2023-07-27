@@ -23,11 +23,14 @@ namespace Micros.Application.UseCases.OutComeCases.QueryHandler
 
         public async Task<OutComeViewModel> Handle(GetOutComeByIdQuery request, CancellationToken cancellationToken)
         {
-            var outCome = await _context.OutComes.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var outCome = await _context.OutComes.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             if (outCome == null)
                 throw new Exception();
 
-            return _mapper.Map<OutComeViewModel>(outCome);
+            var viewModel = _mapper.Map<OutComeViewModel>(outCome);
+            viewModel.User = _mapper.Map<UserViewModel>(outCome.User);
+
+            return viewModel;
         }
     }
 }

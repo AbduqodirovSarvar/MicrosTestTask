@@ -21,11 +21,7 @@ namespace Micros.Application.UseCases.UserCases.Command
         [Required]
         public decimal Balance { get; set; }
         [Required]
-        public int Year { get; set; } = (int)DateTime.UtcNow.Year;
-        [Required]
-        public int Month { get; set; } = (int)DateTime.UtcNow.Month;
-        [Required]
-        public int Day { get; set; } = (int)DateTime.UtcNow.Day;
+        public DateOnly BirthDay { get; set; }
         [Required]
         public Gender Gender { get; set; }
         [Required]

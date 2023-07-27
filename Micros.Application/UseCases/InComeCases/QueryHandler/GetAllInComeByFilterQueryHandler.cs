@@ -44,7 +44,15 @@ namespace Micros.Application.UseCases.InComeCases.QueryHandler
                 inComes = inComes.Where(x => x.CreatedDate.Day == request.Day).ToList();
             }
 
-            return _mapper.Map<List<InComeViewModel>>(inComes);
+            List<InComeViewModel> viewModel = new List<InComeViewModel>();
+            foreach(var inCome in inComes)
+            {
+                var view = _mapper.Map<InComeViewModel>(inCome);
+                view.User = _mapper.Map<UserViewModel>(inCome.User);
+                viewModel.Add(view);
+            }
+
+            return viewModel;
         }
     }
 }

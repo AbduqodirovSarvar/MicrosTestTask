@@ -23,8 +23,8 @@ namespace Micros.Application.UseCases.CommonCases.QueryHandler
         }
         public async Task<ReportViewModel> Handle(GetAllReportsByFilterQuery request, CancellationToken cancellationToken)
         {
-            var inComes = await _context.InComes.ToListAsync(cancellationToken);
-            var outComes = await _context.OutComes.ToListAsync(cancellationToken);
+            var inComes = await _context.InComes.Include(x => x.User).ToListAsync(cancellationToken);
+            var outComes = await _context.OutComes.Include(x => x.User).ToListAsync(cancellationToken);
             if (request?.UserId != null)
             {
                 inComes = inComes.Where(x => x.UserId== request.UserId).ToList();
@@ -46,7 +46,27 @@ namespace Micros.Application.UseCases.CommonCases.QueryHandler
                 outComes = outComes.Where(x => x.CreatedDate.Day == request.Day).ToList();
             }
 
-            return new ReportViewModel(_mapper.Map<List<InComeViewModel>>(inComes), _mapper.Map<List<OutComeViewModel>>(outComes));
+            List<InComeViewModel> inComeViewModel = new List<InComeViewModel>();
+            foreach(var inCome in inComes)
+            {
+                var come = _mapper.Map<InComeViewModel>(inCome);
+                come.User = _mapper.Map<UserViewModel>(inCome.User);
+                inComeViewModel.Add(come);
+            }
+
+            List<OutComeViewModel> outComeViewModel = new List<OutComeViewModel>();
+            foreach(var outCome in outComes)
+            {
+                var comeOut = _mapper.Map<OutComeViewModel>(outCome);
+                comeOut.User = _mapper.Map<UserViewModel>(outCome.User);
+                outComeViewModel.Add(comeOut);
+            }
+
+            ReportViewModel reportView = new ReportViewModel(inComeViewModel, outComeViewModel);
+            reportView.OutcomeTotalSumms = inComeViewModel.Select(x => x.Amount).Sum();
+            reportView.IncomeTotalSumms = inComeViewModel.Select(x => x.Amount).Sum();
+
+            return reportView;
         }
     }
 }

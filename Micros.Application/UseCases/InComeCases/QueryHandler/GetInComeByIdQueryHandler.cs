@@ -23,11 +23,14 @@ namespace Micros.Application.UseCases.InComeCases.QueryHandler
 
         public async Task<InComeViewModel> Handle(GetInComeByIdQuery request, CancellationToken cancellationToken)
         {
-            var inCome = await _context.InComes.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var inCome = await _context.InComes.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             if (inCome == null)
                 throw new Exception();
 
-            return _mapper.Map<InComeViewModel>(inCome);
+            var viewModel = _mapper.Map<InComeViewModel>(inCome);
+            viewModel.User = _mapper.Map<UserViewModel>(inCome.User);
+
+            return viewModel;
         }
     }
 }

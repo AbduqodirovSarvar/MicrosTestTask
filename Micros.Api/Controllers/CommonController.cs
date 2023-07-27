@@ -17,8 +17,8 @@ namespace Micros.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("ByFilter")]
-        public async Task<IActionResult> GetAllByFilter(GetAllReportsByFilterQuery query)
+        [HttpGet]
+        public async Task<IActionResult> GetAllByFilter([FromQuery] GetAllReportsByFilterQuery query)
         {
             return Ok(await _mediator.Send(query));
         }

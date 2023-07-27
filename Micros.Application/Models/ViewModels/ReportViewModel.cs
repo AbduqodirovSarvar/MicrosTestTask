@@ -14,6 +14,8 @@ namespace Micros.Application.Models.ViewModels
             InComeList = inComeList;
             OutComeList = outComeList;
         }
+        public decimal IncomeTotalSumms { get; set; }
+        public decimal OutcomeTotalSumms { get; set; }
         public List<InComeViewModel> InComeList { get; set;} = new List<InComeViewModel>();
         public List<OutComeViewModel> OutComeList { get; set; } = new List<OutComeViewModel>();
     }

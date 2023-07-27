@@ -32,13 +32,13 @@ namespace Micros.Application.UseCases.UserCases.CommandHandler
 
             user = _mapper.Map<User>(request);
             user.Password = _hashService.GetHash(request.Password);
-            user.BirthDay = new DateOnly(request.Year, request.Month, request.Day);
+            user.BirthDay = request.BirthDay;
             user.CreatedTime = DateTime.UtcNow;
 
             await _context.Users.AddAsync(user, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<UserViewModel>(await _context.Users.FirstOrDefaultAsync(x => x.FirstName == user.FirstName, cancellationToken));
+            return _mapper.Map<UserViewModel>(user);
         }
     }
 }

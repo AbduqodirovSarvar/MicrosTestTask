@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +45,15 @@ namespace Micros.Application.UseCases.OutComeCases.QueryHandler
                 outComes = outComes.Where(x => x.CreatedDate.Day == request.Day).ToList();
             }
 
-            return _mapper.Map<List<OutComeViewModel>>(outComes);
+            List<OutComeViewModel> viewModel = new List<OutComeViewModel>();
+            foreach(var outCome in outComes)
+            {
+                var view = _mapper.Map<OutComeViewModel>(outCome);
+                view.User = _mapper.Map<UserViewModel>(outCome.User);
+                viewModel.Add(view);
+            }
+
+            return viewModel;
         }
     }
 }
