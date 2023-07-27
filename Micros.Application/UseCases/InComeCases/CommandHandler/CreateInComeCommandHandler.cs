@@ -32,7 +32,11 @@ namespace Micros.Application.UseCases.InComeCases.CommandHandler
             inCome.CreatedDate = date;
             await _context.InComes.AddAsync(inCome, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            return _mapper.Map<InComeViewModel>(await _context.InComes.FirstOrDefaultAsync(x => x.CreatedDate == date, cancellationToken));
+
+            var viewModel = _mapper.Map<InComeViewModel>(inCome);
+            viewModel.User = _mapper.Map<UserViewModel>(await _context.Users.FirstOrDefaultAsync(x => x.Id == inCome.UserId, cancellationToken));
+
+            return viewModel;
         }
     }
 }

@@ -16,9 +16,7 @@ namespace Micros.Application.UseCases.UserCases.Command
         public string? FirstName { get; set; } = null;
         public string? LastName { get; set; } = null;
         public string? Password { get; set; } = null;
-        public int? Year { get; set; } = null;
-        public int? Month { get; set; } = null;
-        public int? Day { get; set; } = null;
+        public DateOnly? BirthDay { get; set; } = null;
         public Gender? Gender { get; set; } = null;
         public Position? Position { get; set; } = null;
     }

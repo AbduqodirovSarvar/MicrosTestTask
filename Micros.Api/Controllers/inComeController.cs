@@ -31,7 +31,7 @@ namespace Micros.Api.Controllers
             }
         }
 
-        [HttpGet("ByFilter")]
+        [HttpGet("All")]
         public async Task<IActionResult> GetByFilter([FromQuery] GetAllInComeByFilterQuery query)
         {
             return Ok(await _mediator.Send(query));
