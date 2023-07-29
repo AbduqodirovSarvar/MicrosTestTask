@@ -14,6 +14,11 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(p => p.AddPolicy("cors", built =>
+{
+    built.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("V1", new OpenApiInfo()
@@ -51,6 +56,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+app.UseCors("cors");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -67,12 +73,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 // Add CORS configuration
-app.UseCors(options =>
-{
-    options.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-});
+
 
 app.UseAuthorization();
 

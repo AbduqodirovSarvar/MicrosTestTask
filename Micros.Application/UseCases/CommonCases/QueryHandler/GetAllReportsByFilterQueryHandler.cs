@@ -63,7 +63,7 @@ namespace Micros.Application.UseCases.CommonCases.QueryHandler
             }
 
             ReportViewModel reportView = new ReportViewModel(inComeViewModel, outComeViewModel);
-            reportView.OutcomeTotalSumms = inComeViewModel.Select(x => x.Amount).Sum();
+            reportView.OutcomeTotalSumms = outComeViewModel.Select(x => x.Amount).Sum();
             reportView.IncomeTotalSumms = inComeViewModel.Select(x => x.Amount).Sum();
 
             return reportView;

@@ -38,6 +38,7 @@ namespace Micros.Application.UseCases.Authorize.CommandHandler
 
             var loginView = new LoginViewModel();
             loginView.AccessToken = _tokenService.GetAccessToken(claims.ToArray());
+            loginView.AccessToken = "Bearer " + loginView.AccessToken;
             return loginView;
         }
     }

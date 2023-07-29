@@ -21,10 +21,14 @@ namespace Micros.Api.Controllers
         {
             try
             {
-                return Ok(await _mediator.Send(command));
+                Console.WriteLine($"{command.FirstName}   {command.Password}");
+                var result = await _mediator.Send(command);
+                Console.WriteLine($"{result.AccessToken}\n");
+                return Ok(result.AccessToken);
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Badrequest");
                 return BadRequest(ex.Message);
             }
         }

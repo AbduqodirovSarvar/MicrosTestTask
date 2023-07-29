@@ -22,6 +22,7 @@ namespace Micros.Api.Controllers
         {
             try
             {
+                Console.WriteLine($"{command.FirstName}\n{command.LastName}\n{command.BirthDay}");
                 return Ok(await _mediator.Send(command));
             }
             catch (Exception ex)

@@ -24,10 +24,12 @@ namespace Micros.Api.Controllers
         {
             try
             {
-                return Ok(await _mediator.Send(command));
+                var result = await _mediator.Send(command);
+                return Ok(result);
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
             }
         }
